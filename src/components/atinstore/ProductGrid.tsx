@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
-import { categories, products, type Category } from "@/data/products";
+import { categories, products, type Category, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
+import { VariantPickerDialog } from "./VariantPickerDialog";
 import { cn } from "@/lib/utils";
 
 export const ProductGrid = () => {
   const [active, setActive] = useState<Category>("Semua");
+  const [picker, setPicker] = useState<Product | null>(null);
 
   const filtered = useMemo(
     () => (active === "Semua" ? products : products.filter((p) => p.category === active)),
@@ -45,10 +47,15 @@ export const ProductGrid = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
           {filtered.map((p) => (
-            <ProductCard key={p.name} product={p} />
+            <ProductCard key={p.name} product={p} onPickVariant={setPicker} />
           ))}
         </div>
       </div>
+      <VariantPickerDialog
+        product={picker}
+        open={!!picker}
+        onOpenChange={(o) => !o && setPicker(null)}
+      />
     </section>
   );
 };

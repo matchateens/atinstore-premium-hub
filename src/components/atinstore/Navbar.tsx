@@ -1,6 +1,7 @@
 import logo from "@/assets/logos/atinstore.png";
 import { Button } from "@/components/ui/button";
-import { Search, ShoppingCart, MessageCircle } from "lucide-react";
+import { Search, MessageCircle } from "lucide-react";
+import { CartSheet } from "./CartSheet";
 
 export const Navbar = () => {
   return (
@@ -33,21 +34,13 @@ export const Navbar = () => {
           />
         </div>
 
+        <CartSheet />
         <Button
           asChild
           className="hidden md:inline-flex bg-white text-brand hover:bg-white/90 font-semibold gap-2 rounded-full shadow-card"
         >
           <a href="https://wa.me/6282324644060" target="_blank" rel="noopener noreferrer">
             <MessageCircle className="h-4 w-4" /> Chat Admin
-          </a>
-        </Button>
-        <Button
-          asChild
-          size="icon"
-          className="md:hidden bg-white text-brand hover:bg-white/90 rounded-full shadow-card"
-        >
-          <a href="https://wa.me/6282324644060" target="_blank" rel="noopener noreferrer" aria-label="Chat Admin">
-            <MessageCircle className="h-4 w-4" />
           </a>
         </Button>
       </nav>
