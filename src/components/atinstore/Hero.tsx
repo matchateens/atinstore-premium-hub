@@ -31,7 +31,7 @@ export const Hero = () => {
             <a href="#produk">Lihat Katalog</a>
           </Button>
           <Button asChild size="lg" variant="outline" className="bg-transparent border-beige/30 text-primary-foreground hover:bg-beige/10 hover:text-primary-foreground">
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">Chat Admin</a>
+            <a href="https://wa.me/6282324644060" target="_blank" rel="noopener noreferrer">Chat Admin</a>
           </Button>
         </div>
 
