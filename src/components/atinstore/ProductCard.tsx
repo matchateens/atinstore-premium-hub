@@ -1,16 +1,42 @@
 import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle } from "lucide-react";
+import { ShoppingCart, Plus } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
-export const ProductCard = ({ product }: { product: Product }) => {
-  const waText = encodeURIComponent(`Halo Atinstore, saya mau order ${product.name}`);
+type Props = {
+  product: Product;
+  onPickVariant: (product: Product) => void;
+};
+
+export const ProductCard = ({ product, onPickVariant }: Props) => {
+  const { addItem } = useCart();
+  const hasMany = product.variants.length > 1;
   const lowest = product.variants.reduce<string>((acc, v) => {
     const num = parseInt(v.price.replace(/\D/g, ""));
     if (!num) return acc;
     const accNum = parseInt(acc.replace(/\D/g, "")) || Infinity;
     return num < accNum ? v.price : acc;
   }, "");
+
+  const handleClick = () => {
+    if (hasMany) {
+      onPickVariant(product);
+      return;
+    }
+    const v = product.variants[0];
+    addItem({
+      id: `${product.name}::${v.label}`,
+      productName: product.name,
+      variantLabel: v.label,
+      price: v.price,
+      note: v.note,
+      logo: product.logo,
+    });
+    toast.success(`${product.name} ditambahkan ke keranjang`);
+  };
+
   return (
     <article className="group relative rounded-2xl bg-card border border-border shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col">
       <div className="relative aspect-square w-full bg-gradient-to-br from-brand/10 via-brand-light/5 to-background flex items-center justify-center p-6 overflow-hidden">
@@ -32,7 +58,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
       <div className="p-3 md:p-4 flex flex-col gap-2 flex-1">
         <h3 className="font-display text-base md:text-lg font-bold text-foreground truncate">{product.name}</h3>
         <div className="text-[11px] text-muted-foreground line-clamp-1">
-          {product.variants.length} pilihan paket tersedia
+          {hasMany ? `${product.variants.length} pilihan paket tersedia` : product.variants[0].label}
         </div>
         <div className="mt-auto pt-2">
           <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Mulai dari</div>
@@ -41,13 +67,19 @@ export const ProductCard = ({ product }: { product: Product }) => {
           </div>
         </div>
         <Button
-          asChild
+          onClick={handleClick}
           size="sm"
           className="w-full bg-gradient-brand hover:opacity-90 text-white gap-1.5 rounded-full shadow-card"
         >
-          <a href={`https://wa.me/6282324644060?text=${waText}`} target="_blank" rel="noopener noreferrer">
-            <MessageCircle className="h-3.5 w-3.5" /> Pesan
-          </a>
+          {hasMany ? (
+            <>
+              <Plus className="h-3.5 w-3.5" /> Pilih Paket
+            </>
+          ) : (
+            <>
+              <ShoppingCart className="h-3.5 w-3.5" /> Tambah
+            </>
+          )}
         </Button>
       </div>
     </article>
