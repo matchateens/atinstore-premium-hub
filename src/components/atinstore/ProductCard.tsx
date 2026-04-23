@@ -34,7 +34,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
 
       <div className="p-5 pt-0">
         <Button asChild className="w-full bg-primary hover:bg-navy-light text-primary-foreground gap-2">
-          <a href={`https://wa.me/6281234567890?text=${waText}`} target="_blank" rel="noopener noreferrer">
+          <a href={`https://wa.me/6282324644060?text=${waText}`} target="_blank" rel="noopener noreferrer">
             <MessageCircle className="h-4 w-4" /> Pesan Sekarang
           </a>
         </Button>

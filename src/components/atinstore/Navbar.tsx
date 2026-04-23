@@ -23,7 +23,7 @@ export const Navbar = () => {
           <a href="#cara" className="hover:text-primary transition-colors">Cara Order</a>
         </div>
         <Button asChild variant="default" className="bg-primary hover:bg-navy-light shadow-soft">
-          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/6282324644060" target="_blank" rel="noopener noreferrer">
             Order via WA
           </a>
         </Button>
