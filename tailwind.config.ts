@@ -19,14 +19,14 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        navy: {
-          DEFAULT: "hsl(var(--navy))",
-          deep: "hsl(var(--navy-deep))",
-          light: "hsl(var(--navy-light))",
+        brand: {
+          DEFAULT: "hsl(var(--brand))",
+          deep: "hsl(var(--brand-deep))",
+          light: "hsl(var(--brand-light))",
         },
-        beige: {
-          DEFAULT: "hsl(var(--beige))",
-          light: "hsl(var(--beige-light))",
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          2: "hsl(var(--surface-2))",
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
@@ -78,6 +78,7 @@ export default {
       },
       backgroundImage: {
         "gradient-hero": "var(--gradient-hero)",
+        "gradient-brand": "var(--gradient-brand)",
         "gradient-gold": "var(--gradient-gold)",
         "gradient-card": "var(--gradient-card)",
       },
@@ -85,6 +86,7 @@ export default {
         elegant: "var(--shadow-elegant)",
         soft: "var(--shadow-soft)",
         gold: "var(--shadow-gold)",
+        card: "var(--shadow-card)",
       },
       fontFamily: {
         display: ['"Playfair Display"', "serif"],

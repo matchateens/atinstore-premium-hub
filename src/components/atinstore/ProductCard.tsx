@@ -5,37 +5,48 @@ import { MessageCircle } from "lucide-react";
 
 export const ProductCard = ({ product }: { product: Product }) => {
   const waText = encodeURIComponent(`Halo Atinstore, saya mau order ${product.name}`);
+  const lowest = product.variants.reduce<string>((acc, v) => {
+    const num = parseInt(v.price.replace(/\D/g, ""));
+    if (!num) return acc;
+    const accNum = parseInt(acc.replace(/\D/g, "")) || Infinity;
+    return num < accNum ? v.price : acc;
+  }, "");
   return (
-    <article className="group relative rounded-2xl bg-gradient-card border border-border shadow-soft hover:shadow-elegant transition-smooth overflow-hidden flex flex-col">
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-gold opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="p-6 flex items-start gap-4 border-b border-border/60">
-        <div className="h-14 w-14 rounded-xl bg-beige-light p-2 flex items-center justify-center shadow-soft shrink-0">
-          <img src={product.logo} alt={`${product.name} logo`} width={56} height={56} loading="lazy" className="h-full w-full object-contain" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h3 className="font-display text-xl font-bold text-primary truncate">{product.name}</h3>
-          <Badge variant="secondary" className="mt-1.5 bg-beige text-navy hover:bg-beige text-[10px] font-medium">
+    <article className="group relative rounded-2xl bg-card border border-border shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col">
+      <div className="relative aspect-square w-full bg-gradient-to-br from-brand/10 via-brand-light/5 to-background flex items-center justify-center p-6 overflow-hidden">
+        <div className="absolute top-2 left-2">
+          <Badge variant="secondary" className="bg-white/90 text-brand hover:bg-white text-[10px] font-semibold">
             {product.category}
           </Badge>
         </div>
+        <img
+          src={product.logo}
+          alt={`${product.name} logo`}
+          width={120}
+          height={120}
+          loading="lazy"
+          className="h-20 w-20 md:h-24 md:w-24 object-contain drop-shadow-md transition-transform group-hover:scale-110"
+        />
       </div>
 
-      <ul className="p-5 space-y-2.5 flex-1">
-        {product.variants.map((v) => (
-          <li key={v.label} className="flex items-start justify-between gap-3 py-2 border-b border-border/40 last:border-0">
-            <div className="min-w-0">
-              <div className="text-sm font-medium text-foreground">{v.label}</div>
-              {v.note && <div className="text-[11px] text-muted-foreground mt-0.5">{v.note}</div>}
-            </div>
-            <div className="text-sm font-bold text-navy whitespace-nowrap">{v.price}</div>
-          </li>
-        ))}
-      </ul>
-
-      <div className="p-5 pt-0">
-        <Button asChild className="w-full bg-primary hover:bg-navy-light text-primary-foreground gap-2">
+      <div className="p-3 md:p-4 flex flex-col gap-2 flex-1">
+        <h3 className="font-display text-base md:text-lg font-bold text-foreground truncate">{product.name}</h3>
+        <div className="text-[11px] text-muted-foreground line-clamp-1">
+          {product.variants.length} pilihan paket tersedia
+        </div>
+        <div className="mt-auto pt-2">
+          <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Mulai dari</div>
+          <div className="font-display text-lg md:text-xl font-extrabold text-brand">
+            {lowest || product.variants[0]?.price}
+          </div>
+        </div>
+        <Button
+          asChild
+          size="sm"
+          className="w-full bg-gradient-brand hover:opacity-90 text-white gap-1.5 rounded-full shadow-card"
+        >
           <a href={`https://wa.me/6282324644060?text=${waText}`} target="_blank" rel="noopener noreferrer">
-            <MessageCircle className="h-4 w-4" /> Pesan Sekarang
+            <MessageCircle className="h-3.5 w-3.5" /> Pesan
           </a>
         </Button>
       </div>

@@ -12,28 +12,30 @@ export const ProductGrid = () => {
   );
 
   return (
-    <section id="produk" className="py-20 md:py-28 bg-background">
+    <section id="produk" className="py-14 md:py-20 bg-background">
       <div className="container">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="text-xs font-semibold tracking-[0.2em] text-gold uppercase mb-3">Katalog</div>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-primary mb-4">
-            Pilih Aplikasi Favoritmu
-          </h2>
-          <p className="text-muted-foreground">
-            Lebih dari 17 aplikasi premium tersedia. Semua bergaransi, semua murah.
-          </p>
+        <div className="flex items-end justify-between mb-6 md:mb-8 gap-4">
+          <div>
+            <div className="text-xs font-semibold tracking-[0.18em] text-brand uppercase mb-2">Katalog</div>
+            <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground">
+              Pilih Aplikasi Favoritmu
+            </h2>
+            <p className="text-muted-foreground text-sm mt-1 hidden sm:block">
+              17+ aplikasi premium · semua bergaransi · proses cepat
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-nowrap overflow-x-auto gap-2 mb-8 pb-1 -mx-4 px-4 scrollbar-none">
           {categories.map((c) => (
             <button
               key={c}
               onClick={() => setActive(c)}
               className={cn(
-                "px-5 py-2 rounded-full text-sm font-medium transition-smooth border",
+                "px-4 py-2 rounded-full text-sm font-medium transition-smooth border whitespace-nowrap shrink-0",
                 active === c
-                  ? "bg-primary text-primary-foreground border-primary shadow-soft"
-                  : "bg-beige-light text-navy border-border hover:bg-beige"
+                  ? "bg-brand text-white border-brand shadow-card"
+                  : "bg-card text-foreground border-border hover:border-brand/40 hover:text-brand"
               )}
             >
               {c}
@@ -41,7 +43,7 @@ export const ProductGrid = () => {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
           {filtered.map((p) => (
             <ProductCard key={p.name} product={p} />
           ))}
