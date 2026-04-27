@@ -8,7 +8,8 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Trash2, Minus, Plus, MessageCircle } from "lucide-react";
-import { useCart, buildCheckoutMessage } from "@/context/CartContext";
+import { useCart } from "@/context/CartContext";
+import { buildCheckoutMessage } from "@/lib/checkout";
 import { useState } from "react";
 
 const WA_NUMBER = "6282324644060";
