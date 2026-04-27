@@ -45,20 +45,38 @@ export const ProductCard = ({ product, onPickVariant }: Props) => {
             {product.category}
           </Badge>
         </div>
-        <img
-          src={product.logo}
-          alt={`${product.name} logo`}
-          width={120}
-          height={120}
-          loading="lazy"
-          className="h-20 w-20 md:h-24 md:w-24 object-contain drop-shadow-md transition-transform group-hover:scale-110"
-        />
+        {product.logo ? (
+          <img
+            src={product.logo}
+            alt={`${product.name} logo`}
+            width={120}
+            height={120}
+            loading="lazy"
+            className="h-20 w-20 md:h-24 md:w-24 object-contain drop-shadow-md transition-transform group-hover:scale-110"
+          />
+        ) : (
+          <div className="h-20 w-20 md:h-24 md:w-24 rounded-2xl bg-gradient-brand text-white font-display font-extrabold text-3xl md:text-4xl flex items-center justify-center shadow-card transition-transform group-hover:scale-110">
+            {product.name
+              .replace(/[^A-Za-z0-9 ]/g, "")
+              .split(" ")
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((w) => w[0])
+              .join("")
+              .toUpperCase()}
+          </div>
+        )}
       </div>
 
       <div className="p-3 md:p-4 flex flex-col gap-2 flex-1">
         <h3 className="font-display text-base md:text-lg font-bold text-foreground truncate">{product.name}</h3>
-        <div className="text-[11px] text-muted-foreground line-clamp-1">
-          {hasMany ? `${product.variants.length} pilihan paket tersedia` : product.variants[0].label}
+        {product.description && (
+          <p className="text-[11px] leading-snug text-muted-foreground line-clamp-2">
+            {product.description}
+          </p>
+        )}
+        <div className="text-[11px] font-medium text-brand/80 line-clamp-1">
+          {hasMany ? `${product.variants.length} pilihan paket` : product.variants[0].label}
         </div>
         <div className="mt-auto pt-2">
           <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Mulai dari</div>
