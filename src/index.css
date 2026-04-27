@@ -8,46 +8,46 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Atinstore — Marketplace Bright Blue theme */
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    /* Atinstore — Marketplace Purple theme */
+    --background: 270 40% 99%;
+    --foreground: 265 50% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 265 50% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 265 50% 12%;
 
-    --primary: 209 100% 53%;
+    --primary: 264 100% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 203 100% 95%;
-    --secondary-foreground: 213 87% 25%;
+    --secondary: 264 100% 96%;
+    --secondary-foreground: 265 70% 25%;
 
-    --muted: 203 100% 96%;
-    --muted-foreground: 213 30% 40%;
+    --muted: 264 60% 96%;
+    --muted-foreground: 265 20% 40%;
 
-    --accent: 200 100% 76%;
-    --accent-foreground: 213 87% 25%;
+    --accent: 263 100% 73%;
+    --accent-foreground: 265 70% 20%;
 
     --destructive: 0 75% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 203 80% 88%;
-    --input: 203 80% 88%;
-    --ring: 209 100% 53%;
+    --border: 264 70% 90%;
+    --input: 264 70% 90%;
+    --ring: 264 100% 60%;
 
     --radius: 0.85rem;
 
-    /* Marketplace tokens — Bright Blue palette */
-    --brand: 209 100% 53%;          /* 600 #0E8FFF */
-    --brand-deep: 213 87% 40%;      /* 800 #0D5EC0 */
-    --brand-light: 200 100% 76%;    /* 300 #87DEFF */
-    --brand-bg: 203 100% 86%;       /* 200 #B8EAFF */
-    --surface: 203 100% 98%;
+    /* Marketplace tokens — Purple palette */
+    --brand: 264 100% 60%;          /* 600 #7A1AFF */
+    --brand-deep: 266 72% 31%;      /* 800 #6107DF -> deep */
+    --brand-light: 263 100% 73%;    /* 400 #A177FF */
+    --brand-bg: 264 100% 95%;       /* tint */
+    --surface: 270 100% 99%;
     --surface-2: 0 0% 100%;
-    --gold: 200 100% 65%;           /* 400 #4ECAFF — accent cyan */
-    --gold-light: 200 100% 76%;     /* 300 #87DEFF */
+    --gold: 263 100% 73%;           /* 400 #A177FF — accent */
+    --gold-light: 264 100% 85%;     /* lighter purple */
 
     --gradient-hero: linear-gradient(135deg, hsl(var(--brand-deep)) 0%, hsl(var(--brand)) 50%, hsl(var(--brand-light)) 100%);
     --gradient-brand: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(var(--brand-light)) 100%);
@@ -55,9 +55,9 @@ All colors MUST be HSL.
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
 
     --shadow-elegant: 0 20px 50px -20px hsl(var(--brand) / 0.35);
-    --shadow-soft: 0 6px 20px -8px hsl(217 50% 30% / 0.15);
+    --shadow-soft: 0 6px 20px -8px hsl(265 50% 30% / 0.15);
     --shadow-gold: 0 10px 30px -10px hsl(var(--gold) / 0.45);
-    --shadow-card: 0 4px 12px -4px hsl(217 30% 30% / 0.1);
+    --shadow-card: 0 4px 12px -4px hsl(265 30% 30% / 0.1);
 
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
