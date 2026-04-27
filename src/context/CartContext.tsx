@@ -6,7 +6,7 @@ export type CartItem = {
   variantLabel: string;
   price: string;
   note?: string;
-  logo: string;
+  logo?: string;
   qty: number;
 };
 

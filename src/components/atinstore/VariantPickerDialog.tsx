@@ -45,8 +45,21 @@ export const VariantPickerDialog = ({ product, open, onOpenChange }: Props) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <div className="flex items-center gap-3">
-            <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-brand/10 to-brand-light/10 flex items-center justify-center p-2 shrink-0">
-              <img src={product.logo} alt={product.name} className="h-full w-full object-contain" />
+            <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-brand/10 to-brand-light/10 flex items-center justify-center p-2 shrink-0 overflow-hidden">
+              {product.logo ? (
+                <img src={product.logo} alt={product.name} className="h-full w-full object-contain" />
+              ) : (
+                <span className="font-display font-extrabold text-brand text-base">
+                  {product.name
+                    .replace(/[^A-Za-z0-9 ]/g, "")
+                    .split(" ")
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map((w) => w[0])
+                    .join("")
+                    .toUpperCase()}
+                </span>
+              )}
             </div>
             <div className="text-left">
               <DialogTitle className="font-display text-xl">{product.name}</DialogTitle>
@@ -54,6 +67,12 @@ export const VariantPickerDialog = ({ product, open, onOpenChange }: Props) => {
             </div>
           </div>
         </DialogHeader>
+
+        {product.description && (
+          <div className="rounded-lg bg-muted/40 border border-border px-3 py-2 text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
+            {product.description}
+          </div>
+        )}
 
         <div className="grid gap-2 py-2 max-h-[50vh] overflow-y-auto">
           {product.variants.map((v, i) => (

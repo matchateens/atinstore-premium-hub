@@ -62,8 +62,21 @@ export const CartSheet = () => {
                   key={item.id}
                   className="flex gap-3 p-3 rounded-xl border border-border bg-card"
                 >
-                  <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-brand/10 to-brand-light/10 flex items-center justify-center p-1.5 shrink-0">
-                    <img src={item.logo} alt={item.productName} className="h-full w-full object-contain" />
+                  <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-brand/10 to-brand-light/10 flex items-center justify-center p-1.5 shrink-0 overflow-hidden">
+                    {item.logo ? (
+                      <img src={item.logo} alt={item.productName} className="h-full w-full object-contain" />
+                    ) : (
+                      <span className="font-display font-extrabold text-brand text-sm">
+                        {item.productName
+                          .replace(/[^A-Za-z0-9 ]/g, "")
+                          .split(" ")
+                          .filter(Boolean)
+                          .slice(0, 2)
+                          .map((w) => w[0])
+                          .join("")
+                          .toUpperCase()}
+                      </span>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
