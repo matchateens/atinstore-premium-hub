@@ -18,36 +18,36 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 217 91% 55%;
+    --primary: 209 100% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 14%;
+    --secondary: 203 100% 95%;
+    --secondary-foreground: 213 87% 25%;
 
-    --muted: 210 30% 94%;
-    --muted-foreground: 215 16% 45%;
+    --muted: 203 100% 96%;
+    --muted-foreground: 213 30% 40%;
 
-    --accent: 38 92% 55%;
-    --accent-foreground: 222 47% 14%;
+    --accent: 200 100% 76%;
+    --accent-foreground: 213 87% 25%;
 
     --destructive: 0 75% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 55%;
+    --border: 203 80% 88%;
+    --input: 203 80% 88%;
+    --ring: 209 100% 53%;
 
     --radius: 0.85rem;
 
-    /* Marketplace tokens */
-    --brand: 217 91% 55%;
-    --brand-deep: 222 80% 38%;
-    --brand-light: 213 94% 68%;
-    --brand-bg: 217 91% 60%;
-    --surface: 210 40% 98%;
+    /* Marketplace tokens — Bright Blue palette */
+    --brand: 209 100% 53%;          /* 600 #0E8FFF */
+    --brand-deep: 213 87% 40%;      /* 800 #0D5EC0 */
+    --brand-light: 200 100% 76%;    /* 300 #87DEFF */
+    --brand-bg: 203 100% 86%;       /* 200 #B8EAFF */
+    --surface: 203 100% 98%;
     --surface-2: 0 0% 100%;
-    --gold: 38 92% 55%;
-    --gold-light: 42 96% 65%;
+    --gold: 200 100% 65%;           /* 400 #4ECAFF — accent cyan */
+    --gold-light: 200 100% 76%;     /* 300 #87DEFF */
 
     --gradient-hero: linear-gradient(135deg, hsl(var(--brand-deep)) 0%, hsl(var(--brand)) 50%, hsl(var(--brand-light)) 100%);
     --gradient-brand: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(var(--brand-light)) 100%);
