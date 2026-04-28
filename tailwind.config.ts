@@ -89,7 +89,7 @@ export default {
         card: "var(--shadow-card)",
       },
       fontFamily: {
-        display: ['"Playfair Display"', "serif"],
+        display: ['"Plus Jakarta Sans"', '"Inter"', "system-ui", "sans-serif"],
         sans: ['"Inter"', "system-ui", "sans-serif"],
       },
       keyframes: {

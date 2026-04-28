@@ -1,16 +1,16 @@
 import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Plus } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { toast } from "sonner";
 
 type Props = {
   product: Product;
   onPickVariant: (product: Product) => void;
+  flashDiscount?: number; // e.g. 10 means 10% OFF badge
+  variant?: "default" | "flash";
 };
 
-export const ProductCard = ({ product, onPickVariant }: Props) => {
+export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "default" }: Props) => {
   const { addItem } = useCart();
   const hasMany = product.variants.length > 1;
   const lowest = product.variants.reduce<string>((acc, v) => {
@@ -37,14 +37,19 @@ export const ProductCard = ({ product, onPickVariant }: Props) => {
     toast.success(`${product.name} ditambahkan ke keranjang`);
   };
 
+  const lowestNum = parseInt((lowest || product.variants[0]?.price || "").replace(/\D/g, "")) || 0;
+  const originalPrice =
+    flashDiscount && lowestNum
+      ? `Rp ${Math.round(lowestNum / (1 - flashDiscount / 100)).toLocaleString("id-ID")}`
+      : null;
+
   return (
     <article className="group relative rounded-2xl bg-card border border-border shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col">
-      <div className="relative aspect-square w-full bg-gradient-to-br from-brand/10 via-brand-light/5 to-background flex items-center justify-center p-6 overflow-hidden">
-        <div className="absolute top-2 left-2">
-          <Badge variant="secondary" className="bg-white/90 text-brand hover:bg-white text-[10px] font-semibold">
-            {product.category}
-          </Badge>
-        </div>
+      {/* Image area with gradient (mimics reference) */}
+      <div
+        className="relative aspect-[4/3] w-full flex items-center justify-center p-6 overflow-hidden"
+        style={{ background: "var(--gradient-card)" }}
+      >
         {product.logo ? (
           <img
             src={product.logo}
@@ -69,35 +74,49 @@ export const ProductCard = ({ product, onPickVariant }: Props) => {
       </div>
 
       <div className="p-3 md:p-4 flex flex-col gap-2 flex-1">
-        <h3 className="font-display text-base md:text-lg font-bold text-foreground truncate">{product.name}</h3>
+        {/* Badges row */}
+        <div className="flex items-center gap-1.5 flex-wrap">
+          {variant === "flash" && flashDiscount ? (
+            <span className="inline-flex items-center rounded-md bg-destructive/10 text-destructive text-[10px] font-bold px-1.5 py-0.5">
+              Flash {flashDiscount}%
+            </span>
+          ) : null}
+          <span className="inline-flex items-center rounded-md bg-secondary text-brand text-[10px] font-semibold px-1.5 py-0.5">
+            {product.category}
+          </span>
+        </div>
+
+        <h3 className="font-display text-sm md:text-base font-extrabold text-foreground truncate mt-0.5">
+          {product.name}
+        </h3>
         {product.description && (
           <p className="text-[11px] leading-snug text-muted-foreground line-clamp-2">
             {product.description}
           </p>
         )}
-        <div className="text-[11px] font-medium text-brand/80 line-clamp-1">
-          {hasMany ? `${product.variants.length} pilihan paket` : product.variants[0].label}
-        </div>
+
         <div className="mt-auto pt-2">
-          <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Mulai dari</div>
-          <div className="font-display text-lg md:text-xl font-extrabold text-brand">
-            {lowest || product.variants[0]?.price}
+          <div className="flex items-baseline gap-2">
+            <div className="font-display text-base md:text-lg font-extrabold text-brand">
+              {lowest || product.variants[0]?.price}
+            </div>
+            {originalPrice && (
+              <div className="text-[11px] text-muted-foreground line-through">
+                {originalPrice}
+              </div>
+            )}
+          </div>
+          <div className="text-[11px] text-muted-foreground mt-0.5 line-clamp-1">
+            {hasMany ? `${product.variants.length} varian aktif` : product.variants[0].label}
           </div>
         </div>
+
         <Button
           onClick={handleClick}
           size="sm"
-          className="w-full bg-gradient-brand hover:opacity-90 text-white gap-1.5 rounded-full shadow-card"
+          className="w-full bg-brand hover:bg-brand/90 text-white font-semibold rounded-lg h-9"
         >
-          {hasMany ? (
-            <>
-              <Plus className="h-3.5 w-3.5" /> Pilih Paket
-            </>
-          ) : (
-            <>
-              <ShoppingCart className="h-3.5 w-3.5" /> Tambah
-            </>
-          )}
+          Beli
         </Button>
       </div>
     </article>
