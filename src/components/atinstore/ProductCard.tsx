@@ -2,6 +2,15 @@ import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { toast } from "sonner";
+import { useState } from "react";
+import { Info } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 type Props = {
   product: Product;
@@ -12,6 +21,7 @@ type Props = {
 
 export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "default" }: Props) => {
   const { addItem } = useCart();
+  const [detailOpen, setDetailOpen] = useState(false);
   const hasMany = product.variants.length > 1;
   const lowest = product.variants.reduce<string>((acc, v) => {
     const num = parseInt(v.price.replace(/\D/g, ""));
@@ -111,14 +121,92 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
           </div>
         </div>
 
-        <Button
-          onClick={handleClick}
-          size="sm"
-          className="w-full bg-brand hover:bg-brand/90 text-white font-semibold rounded-lg h-9"
-        >
-          Beli
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => setDetailOpen(true)}
+            size="sm"
+            variant="outline"
+            className="flex-1 border-border bg-white text-foreground hover:bg-secondary hover:text-brand font-semibold rounded-lg h-9 gap-1.5"
+            aria-label={`Detail ${product.name}`}
+          >
+            <Info className="h-3.5 w-3.5" /> Detail
+          </Button>
+          <Button
+            onClick={handleClick}
+            size="sm"
+            className="flex-1 bg-brand hover:bg-brand/90 text-white font-semibold rounded-lg h-9"
+          >
+            Beli
+          </Button>
+        </div>
       </div>
+
+      <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="flex items-center gap-3">
+              {product.logo ? (
+                <img
+                  src={product.logo}
+                  alt={`${product.name} logo`}
+                  className="h-12 w-12 object-contain rounded-lg bg-secondary p-1"
+                />
+              ) : null}
+              <div className="text-left">
+                <DialogTitle className="font-display text-lg font-extrabold">
+                  {product.name}
+                </DialogTitle>
+                <div className="text-[11px] text-brand font-semibold">
+                  {product.category}
+                </div>
+              </div>
+            </div>
+            {product.description && (
+              <DialogDescription className="text-left pt-2 whitespace-pre-line">
+                {product.description}
+              </DialogDescription>
+            )}
+          </DialogHeader>
+
+          <div className="mt-2">
+            <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+              Pilihan paket
+            </div>
+            <ul className="space-y-1.5">
+              {product.variants.map((v) => (
+                <li
+                  key={v.label}
+                  className="flex items-center justify-between rounded-lg border border-border bg-secondary/40 px-3 py-2"
+                >
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-foreground truncate">
+                      {v.label}
+                    </div>
+                    {v.note && (
+                      <div className="text-[11px] text-muted-foreground truncate">
+                        {v.note}
+                      </div>
+                    )}
+                  </div>
+                  <div className="font-display text-sm font-extrabold text-brand shrink-0 ml-3">
+                    {v.price}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <Button
+            onClick={() => {
+              setDetailOpen(false);
+              handleClick();
+            }}
+            className="w-full bg-brand hover:bg-brand/90 text-white font-semibold rounded-lg h-10 mt-2"
+          >
+            {hasMany ? "Pilih paket & beli" : "Beli sekarang"}
+          </Button>
+        </DialogContent>
+      </Dialog>
     </article>
   );
 };
