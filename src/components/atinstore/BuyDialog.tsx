@@ -209,6 +209,21 @@ export const BuyDialog = ({ product, open, onOpenChange, flashDiscount }: Props)
                 maxLength={255}
               />
             </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="buyer-wa">No. WhatsApp</Label>
+              <Input
+                id="buyer-wa"
+                type="tel"
+                inputMode="tel"
+                value={whatsapp}
+                onChange={(e) => setWhatsapp(e.target.value)}
+                placeholder="0812xxxxxxxx"
+                maxLength={20}
+              />
+              <p className="text-[11px] text-muted-foreground">
+                Bukti pembayaran akan dikirim ke nomor ini.
+              </p>
+            </div>
           </div>
 
           {/* Quantity */}
