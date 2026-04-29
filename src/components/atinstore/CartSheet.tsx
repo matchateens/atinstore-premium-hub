@@ -30,7 +30,7 @@ export const CartSheet = () => {
       <SheetTrigger asChild>
         <Button
           size="icon"
-          className="relative bg-white text-brand hover:bg-white/90 rounded-full shadow-card"
+          className="relative bg-card text-brand hover:bg-card/90 rounded-full shadow-card"
           aria-label="Keranjang"
         >
           <ShoppingCart className="h-4 w-4" />

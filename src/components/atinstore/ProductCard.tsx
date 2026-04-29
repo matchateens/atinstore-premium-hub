@@ -126,7 +126,7 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
             onClick={() => setDetailOpen(true)}
             size="sm"
             variant="outline"
-            className="flex-1 border-border bg-white text-foreground hover:bg-secondary hover:text-brand font-semibold rounded-lg h-9 gap-1.5"
+            className="flex-1 border-border bg-card text-foreground hover:bg-secondary hover:text-brand font-semibold rounded-lg h-9 gap-1.5"
             aria-label={`Detail ${product.name}`}
           >
             <Info className="h-3.5 w-3.5" /> Detail
