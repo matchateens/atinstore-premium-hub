@@ -8,7 +8,7 @@ export const Hero = () => {
       style={{ background: "var(--gradient-hero)" }}
     >
       <div className="container">
-        <div className="rounded-3xl bg-white/70 backdrop-blur border border-border shadow-soft p-6 md:p-10 lg:p-12">
+        <div className="rounded-3xl bg-card/70 backdrop-blur border border-border shadow-soft p-6 md:p-10 lg:p-12">
           <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-center">
             {/* Left: headline */}
             <div className="lg:col-span-3">
@@ -34,7 +34,7 @@ export const Hero = () => {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-11 px-6 rounded-full border-border bg-white text-foreground font-semibold"
+                  className="h-11 px-6 rounded-full border-border bg-card text-foreground font-semibold"
                 >
                   <a href="#cara">Cara order</a>
                 </Button>
@@ -71,7 +71,7 @@ export const Hero = () => {
                   ].map((i) => (
                     <div
                       key={i.k}
-                      className="rounded-xl bg-white border border-border p-3 text-center"
+                      className="rounded-xl bg-card border border-border p-3 text-center"
                     >
                       <div className="font-display text-base md:text-lg font-extrabold text-brand">
                         {i.k}
