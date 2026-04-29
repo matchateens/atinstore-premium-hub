@@ -79,33 +79,53 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Atinstore — Dark theme */
+    --background: 222 47% 7%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 222 40% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 222 40% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 217 100% 62%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 222 35% 14%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 222 35% 16%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 217 100% 62%;
+
+    --brand: 217 100% 62%;
+    --brand-deep: 224 80% 45%;
+    --brand-light: 210 100% 75%;
+    --brand-bg: 222 40% 12%;
+    --surface: 222 40% 9%;
+    --surface-2: 222 40% 11%;
+    --gold: 38 100% 60%;
+    --gold-light: 38 100% 72%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(222 50% 9%) 0%, hsl(222 45% 12%) 100%);
+    --gradient-brand: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(var(--brand-light)) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(222 40% 12%) 0%, hsl(222 45% 16%) 100%);
+
+    --shadow-elegant: 0 20px 50px -20px hsl(var(--brand) / 0.5);
+    --shadow-soft: 0 6px 20px -8px hsl(0 0% 0% / 0.5);
+    --shadow-card: 0 4px 14px -6px hsl(0 0% 0% / 0.4);
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
