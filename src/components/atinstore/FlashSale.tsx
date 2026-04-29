@@ -4,7 +4,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight, Zap } from "lucide-react";
 import { products, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
-import { VariantPickerDialog } from "./VariantPickerDialog";
+import { BuyDialog } from "./BuyDialog";
 
 const FEATURED_NAMES = [
   "Netflix Premium",
@@ -53,7 +53,7 @@ export const FlashSale = () => {
   return (
     <section className="py-10 md:py-14 bg-background">
       <div className="container">
-        <div className="rounded-3xl border border-border bg-white shadow-card p-5 md:p-7">
+        <div className="rounded-3xl border border-border bg-card shadow-card p-5 md:p-7">
           <div className="flex items-end justify-between gap-4 mb-5">
             <div>
               <div className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 text-destructive text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 mb-2">
@@ -102,10 +102,11 @@ export const FlashSale = () => {
           </div>
         </div>
       </div>
-      <VariantPickerDialog
+      <BuyDialog
         product={picker}
         open={!!picker}
         onOpenChange={(o) => !o && setPicker(null)}
+        flashDiscount={picker ? getDiscount(picker.name) : undefined}
       />
     </section>
   );

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { categories, products, type Category, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
-import { VariantPickerDialog } from "./VariantPickerDialog";
+import { BuyDialog } from "./BuyDialog";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 
@@ -54,7 +54,7 @@ export const ProductGrid = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
           {filtered.map((p) => (
-            <ProductCard key={p.name} product={p} onPickVariant={setPicker} />
+          <ProductCard key={p.name} product={p} onPickVariant={setPicker} />
           ))}
         </div>
 
@@ -64,7 +64,7 @@ export const ProductGrid = () => {
           </div>
         )}
       </div>
-      <VariantPickerDialog
+      <BuyDialog
         product={picker}
         open={!!picker}
         onOpenChange={(o) => !o && setPicker(null)}
