@@ -26,6 +26,12 @@ type Props = {
 const buyerSchema = z.object({
   name: z.string().trim().min(2, "Nama minimal 2 karakter").max(100),
   email: z.string().trim().email("Email tidak valid").max(255),
+  whatsapp: z
+    .string()
+    .trim()
+    .min(8, "No. WhatsApp minimal 8 digit")
+    .max(20, "No. WhatsApp terlalu panjang")
+    .regex(/^[0-9+\-\s]+$/, "Hanya angka, +, -, dan spasi"),
 });
 
 const parsePrice = (price: string) => {
@@ -41,6 +47,7 @@ export const BuyDialog = ({ product, open, onOpenChange, flashDiscount }: Props)
   const [qty, setQty] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const { addItem } = useCart();
   const navigate = useNavigate();
 
@@ -61,7 +68,7 @@ export const BuyDialog = ({ product, open, onOpenChange, flashDiscount }: Props)
     : 0;
 
   const handleSubmit = () => {
-    const parsed = buyerSchema.safeParse({ name, email });
+    const parsed = buyerSchema.safeParse({ name, email, whatsapp });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0].message);
       return;
