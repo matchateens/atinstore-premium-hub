@@ -2,10 +2,11 @@ import logo from "@/assets/logos/atinstore.png";
 import { Button } from "@/components/ui/button";
 import { Search, Headphones, FileText } from "lucide-react";
 import { CartSheet } from "./CartSheet";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = () => {
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-border">
       <nav className="container flex items-center gap-3 md:gap-4 py-3">
         <a href="#top" className="flex items-center gap-2 shrink-0 group">
           <div className="h-10 w-10 rounded-xl bg-brand flex items-center justify-center shadow-card overflow-hidden">
@@ -34,10 +35,11 @@ export const Navbar = () => {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
+          <ThemeToggle />
           <Button
             asChild
             variant="outline"
-            className="hidden sm:inline-flex rounded-full border-border bg-white text-foreground hover:bg-secondary gap-2 font-semibold"
+            className="hidden sm:inline-flex rounded-full border-border bg-card text-foreground hover:bg-secondary gap-2 font-semibold"
           >
             <a href="#produk">
               <FileText className="h-4 w-4" /> Cek Invoice
