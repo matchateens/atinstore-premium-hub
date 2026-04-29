@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { categories, products, type Category, type Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
-import { VariantPickerDialog } from "./VariantPickerDialog";
+import { BuyDialog } from "./BuyDialog";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 
@@ -31,7 +31,7 @@ export const ProductGrid = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Cari produk…"
-              className="w-full h-11 pl-11 pr-4 rounded-full bg-white border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand/30"
+              className="w-full h-11 pl-11 pr-4 rounded-full bg-card border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand/30"
             />
           </div>
           <div className="flex flex-nowrap overflow-x-auto gap-2 pb-1 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none">
@@ -43,7 +43,7 @@ export const ProductGrid = () => {
                   "px-4 h-10 rounded-full text-sm font-semibold transition-colors border whitespace-nowrap shrink-0",
                   active === c
                     ? "bg-brand text-white border-brand shadow-card"
-                    : "bg-white text-foreground border-border hover:border-brand/40 hover:text-brand"
+                    : "bg-card text-foreground border-border hover:border-brand/40 hover:text-brand"
                 )}
               >
                 {c}
@@ -54,7 +54,7 @@ export const ProductGrid = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
           {filtered.map((p) => (
-            <ProductCard key={p.name} product={p} onPickVariant={setPicker} />
+          <ProductCard key={p.name} product={p} onPickVariant={setPicker} />
           ))}
         </div>
 
@@ -64,7 +64,7 @@ export const ProductGrid = () => {
           </div>
         )}
       </div>
-      <VariantPickerDialog
+      <BuyDialog
         product={picker}
         open={!!picker}
         onOpenChange={(o) => !o && setPicker(null)}
