@@ -53,24 +53,40 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
       ? `Rp ${Math.round(lowestNum / (1 - flashDiscount / 100)).toLocaleString("id-ID")}`
       : null;
 
+  // Generate a unique gradient based on product name for visual variety
+  const nameHash = product.name.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+  const hue1 = nameHash % 360;
+  const hue2 = (hue1 + 40) % 360;
+
   return (
-    <article className="group relative rounded-2xl bg-card border border-border shadow-card hover:shadow-elegant hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col">
-      {/* Image area with gradient (mimics reference) */}
+    <article className="group relative rounded-2xl bg-card border border-border shadow-card hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
+      {/* Image area — larger logo, decorative orbs */}
       <div
-        className="relative aspect-[4/3] w-full flex items-center justify-center p-6 overflow-hidden"
+        className="relative aspect-[3/2] w-full flex items-center justify-center overflow-hidden"
         style={{ background: "var(--gradient-card)" }}
       >
+        {/* Decorative background orbs */}
+        <div
+          className="absolute -top-6 -right-6 w-28 h-28 rounded-full opacity-20 blur-2xl transition-opacity group-hover:opacity-35"
+          style={{ background: `hsl(${hue1}, 70%, 60%)` }}
+        />
+        <div
+          className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full opacity-15 blur-2xl transition-opacity group-hover:opacity-30"
+          style={{ background: `hsl(${hue2}, 65%, 55%)` }}
+        />
+
         {product.logo ? (
           <img
             src={product.logo}
             alt={`${product.name} logo`}
-            width={120}
-            height={120}
             loading="lazy"
-            className="h-20 w-20 md:h-24 md:w-24 object-contain drop-shadow-md transition-transform group-hover:scale-110"
+            className="w-3/5 h-3/5 object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-110"
           />
         ) : (
-          <div className="h-20 w-20 md:h-24 md:w-24 rounded-2xl bg-gradient-brand text-white font-display font-extrabold text-3xl md:text-4xl flex items-center justify-center shadow-card transition-transform group-hover:scale-110">
+          <div
+            className="w-24 h-24 md:w-28 md:h-28 rounded-[1.25rem] text-white font-display font-extrabold text-4xl md:text-5xl flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110"
+            style={{ background: `linear-gradient(135deg, hsl(${hue1}, 70%, 55%), hsl(${hue2}, 65%, 50%))` }}
+          >
             {product.name
               .replace(/[^A-Za-z0-9 ]/g, "")
               .split(" ")
@@ -81,9 +97,12 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
               .toUpperCase()}
           </div>
         )}
+
+        {/* Subtle shine overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </div>
 
-      <div className="p-3 md:p-4 flex flex-col gap-2 flex-1">
+      <div className="p-3 md:p-4 flex flex-col gap-1.5 flex-1">
         {/* Badges row */}
         <div className="flex items-center gap-1.5 flex-wrap">
           {variant === "flash" && flashDiscount ? (
@@ -96,7 +115,7 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
           </span>
         </div>
 
-        <h3 className="font-display text-sm md:text-base font-extrabold text-foreground truncate mt-0.5">
+        <h3 className="font-display text-sm md:text-base font-extrabold text-foreground truncate">
           {product.name}
         </h3>
         {product.description && (
@@ -121,12 +140,12 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-1">
           <Button
             onClick={() => setDetailOpen(true)}
             size="sm"
             variant="outline"
-            className="flex-1 border-border bg-card text-foreground hover:bg-secondary hover:text-brand font-semibold rounded-lg h-9 gap-1.5"
+            className="flex-1 border-border bg-card text-foreground hover:bg-secondary hover:text-brand font-semibold rounded-xl h-9 gap-1.5"
             aria-label={`Detail ${product.name}`}
           >
             <Info className="h-3.5 w-3.5" /> Detail
@@ -134,7 +153,7 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
           <Button
             onClick={handleClick}
             size="sm"
-            className="flex-1 bg-brand hover:bg-brand/90 text-white font-semibold rounded-lg h-9"
+            className="flex-1 bg-brand hover:bg-brand/90 text-white font-semibold rounded-xl h-9"
           >
             Beli
           </Button>

@@ -15,6 +15,23 @@ import vpnexpress from "@/assets/logos/vpnexpress.png";
 import vidio from "@/assets/logos/vidio.png";
 import viu from "@/assets/logos/viu.png";
 import youtube from "@/assets/logos/youtube.png";
+import alightmotion from "@/assets/logos/alightmotion.png";
+import applemusic from "@/assets/logos/applemusic.png";
+import camscanner from "@/assets/logos/camscanner.png";
+import disneyplus from "@/assets/logos/disneyplus.png";
+import duolingo from "@/assets/logos/duolingo.png";
+import googledrive from "@/assets/logos/googledrive.png";
+import grammarly from "@/assets/logos/grammarly.png";
+import hbomax from "@/assets/logos/hbomax.png";
+import leonardoai from "@/assets/logos/leonardoai.png";
+import lightroom from "@/assets/logos/lightroom.png";
+import iqiyi from "@/assets/logos/iqiyi.png";
+import primevideo from "@/assets/logos/primevideo.png";
+import scribd from "@/assets/logos/scribd.png";
+import vsco from "@/assets/logos/vsco.png";
+import wattpad from "@/assets/logos/wattpad.png";
+import wetv from "@/assets/logos/wetv.png";
+import wpsoffice from "@/assets/logos/wpsoffice.png";
 
 export type Variant = {
   label: string;
@@ -34,12 +51,14 @@ export const products: Product[] = [
   {
     name: "Alight Motion",
     category: "Produktivitas",
+    logo: alightmotion,
     description: "Garansi login.",
     variants: [{ label: "1 Tahun", price: "Rp 1.500" }],
   },
   {
     name: "Apple Music",
     category: "Streaming",
+    logo: applemusic,
     description: "No garansi — pahami sebelum order.",
     variants: [{ label: "1 Bulan", price: "Rp 5.000" }],
   },
@@ -56,6 +75,7 @@ export const products: Product[] = [
   {
     name: "Camscanner",
     category: "Produktivitas",
+    logo: camscanner,
     description: "Akun sharing 1 tahun, garansi 3 bulan.",
     variants: [{ label: "1 Tahun", price: "Rp 18.000" }],
   },
@@ -93,6 +113,7 @@ export const products: Product[] = [
   {
     name: "Disney+",
     category: "Streaming",
+    logo: disneyplus,
     description: "Full garansi & akun sharing 10 user.",
     variants: [{ label: "1 Bulan", price: "Rp 23.000" }],
   },
@@ -111,6 +132,7 @@ export const products: Product[] = [
   {
     name: "Duolingo Super",
     category: "Edukasi",
+    logo: duolingo,
     description: "Full garansi & akun private.",
     variants: [{ label: "1 Bulan", price: "Rp 2.000" }],
   },
@@ -135,36 +157,42 @@ export const products: Product[] = [
   {
     name: "Google Drive Storage",
     category: "Produktivitas",
+    logo: googledrive,
     description: "Durasi 4 bulan, no garansi.",
     variants: [{ label: "Storage 2TB Sharing", price: "Rp 8.000" }],
   },
   {
     name: "Grammarly",
     category: "Produktivitas",
+    logo: grammarly,
     description: "Akun sharing & garansi 25 hari.",
     variants: [{ label: "1 Bulan", price: "Rp 8.000" }],
   },
   {
     name: "HBO Max",
     category: "Streaming",
+    logo: hbomax,
     description: "Akun sharing, full garansi.",
     variants: [{ label: "1 Bulan", price: "Rp 18.000" }],
   },
   {
     name: "Leonardo AI Unlimited",
     category: "AI",
+    logo: leonardoai,
     description: "Sekali bayar, semua fitur terbuka. Bikin video AI & gambar sepuasnya. Cek di app.leonardo.ai",
     variants: [{ label: "Leonardo", price: "Rp 40.000" }],
   },
   {
     name: "Lightroom",
     category: "Produktivitas",
+    logo: lightroom,
     description: "Garansi 3 bulan & akun private.",
     variants: [{ label: "1 Tahun", price: "Rp 8.000" }],
   },
   {
     name: "iQiyi Premium",
     category: "Streaming",
+    logo: iqiyi,
     description: "Full garansi & akun sharing.",
     variants: [{ label: "1 Bulan", price: "Rp 9.000" }],
   },
@@ -194,6 +222,7 @@ export const products: Product[] = [
   {
     name: "Microsoft 365",
     category: "Produktivitas",
+    logo: office365,
     description: "Full garansi.",
     variants: [{ label: "1 Bulan", price: "Rp 8.000" }],
   },
@@ -222,12 +251,14 @@ export const products: Product[] = [
   {
     name: "Prime Video",
     category: "Streaming",
+    logo: primevideo,
     description: "Full garansi.",
     variants: [{ label: "1 Bulan Private", price: "Rp 13.000" }],
   },
   {
     name: "Scribd",
     category: "Edukasi",
+    logo: scribd,
     description: "Full garansi & private akun.",
     variants: [{ label: "1 Bulan", price: "Rp 3.000" }],
   },
@@ -290,11 +321,13 @@ export const products: Product[] = [
   {
     name: "VSCO",
     category: "Produktivitas",
+    logo: vsco,
     description: "Akun sharing & garansi 3 bulan. Bisa iOS & Android.",
     variants: [{ label: "1 Tahun", price: "Rp 18.000" }],
   },
   {
     name: "Wattpad",
+    logo: wattpad,
     category: "Lifestyle",
     description: "Akun sharing & bergaransi.",
     variants: [
@@ -304,6 +337,7 @@ export const products: Product[] = [
   },
   {
     name: "WeTV Premium",
+    logo: wetv,
     category: "Streaming",
     description: "Durasi 1 bulan & bergaransi.",
     variants: [
@@ -328,6 +362,7 @@ export const products: Product[] = [
   },
   {
     name: "WPS Office",
+    logo: wpsoffice,
     category: "Produktivitas",
     description: "Akun sharing & garansi 3 bulan.",
     variants: [{ label: "1 Tahun", price: "Rp 18.000" }],
