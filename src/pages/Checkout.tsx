@@ -1,13 +1,13 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Navbar } from "@/components/atinstore/Navbar";
 import { Footer } from "@/components/atinstore/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CreditCard, QrCode, Wallet, Building2, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowLeft, CreditCard, QrCode, Wallet, Building2, CheckCircle2, Loader2, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
-type BuyerInfo = { name: string; email: string };
+type BuyerInfo = { name: string; email: string; whatsapp: string };
 type CheckoutItem = {
   productName: string;
   variantLabel: string;
@@ -15,6 +15,16 @@ type CheckoutItem = {
   qty: number;
   logo?: string;
   note?: string;
+};
+
+const ADMIN_WA = "6282324644060";
+
+const normalizeWa = (input: string) => {
+  const digits = input.replace(/\D/g, "");
+  if (digits.startsWith("0")) return "62" + digits.slice(1);
+  if (digits.startsWith("62")) return digits;
+  if (digits.startsWith("8")) return "62" + digits;
+  return digits;
 };
 
 const PAYMENT_METHODS = [
@@ -41,6 +51,15 @@ const Checkout = () => {
   const [method, setMethod] = useState<string>("qris");
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
+  // ID transaksi unik — di-generate sekali per kunjungan halaman checkout
+  const orderId = useMemo(
+    () =>
+      "ATN-" +
+      Date.now().toString(36).toUpperCase() +
+      "-" +
+      Math.random().toString(36).slice(2, 6).toUpperCase(),
+    []
+  );
 
   if (!buyer || !item) {
     return (
@@ -66,6 +85,10 @@ const Checkout = () => {
   const adminFee = method === "va" ? 4000 : method === "card" ? Math.round(subtotal * 0.029) : 0;
   const total = subtotal + adminFee;
 
+  // QR mock dinamis: payload berbeda tiap transaksi → gambar QR berubah
+  const qrPayload = `ATINSTORE|${orderId}|${item.productName}-${item.variantLabel}|qty:${item.qty}|amount:${total}|to:${ADMIN_WA}`;
+  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=8&data=${encodeURIComponent(qrPayload)}`;
+
   const handlePay = () => {
     setProcessing(true);
     // mock processing — replace with real payment gateway call later
@@ -77,6 +100,40 @@ const Checkout = () => {
   };
 
   if (success) {
+    const waMessage = [
+      "*BUKTI PEMBAYARAN ATINSTORE*",
+      "",
+      `Order ID: ${orderId}`,
+      `Tanggal: ${new Date().toLocaleString("id-ID")}`,
+      "",
+      "*Data Pembeli*",
+      `Nama   : ${buyer.name}`,
+      `Email  : ${buyer.email}`,
+      `WA     : ${buyer.whatsapp}`,
+      "",
+      "*Detail Pesanan*",
+      `Produk : ${item.productName}`,
+      `Varian : ${item.variantLabel}`,
+      `Jumlah : ${item.qty}`,
+      item.note ? `Catatan: ${item.note}` : "",
+      "",
+      "*Pembayaran*",
+      `Metode   : ${PAYMENT_METHODS.find((m) => m.id === method)?.label ?? method}`,
+      `Subtotal : ${formatRupiah(subtotal)}`,
+      `Admin    : ${adminFee > 0 ? formatRupiah(adminFee) : "Gratis"}`,
+      `*TOTAL   : ${formatRupiah(total)}*`,
+      "",
+      "Status: ✅ LUNAS (simulasi)",
+      "",
+      "Terima kasih telah berbelanja di Atinstore 🙏",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const userWa = normalizeWa(buyer.whatsapp);
+    const waUrl = `https://wa.me/${userWa}?text=${encodeURIComponent(waMessage)}`;
+    const waAdminUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waMessage)}`;
+
     return (
       <main className="min-h-screen bg-background">
         <Navbar />
@@ -89,17 +146,31 @@ const Checkout = () => {
               Pembayaran Berhasil
             </h1>
             <p className="text-muted-foreground mt-2 text-sm">
-              Invoice telah dikirim ke <span className="font-semibold text-foreground">{buyer.email}</span>
+              Order <span className="font-mono font-semibold text-foreground">{orderId}</span>
             </p>
             <div className="mt-6 rounded-2xl bg-secondary/40 p-4 text-left text-sm space-y-1">
               <div className="flex justify-between"><span className="text-muted-foreground">Produk</span><span className="font-semibold">{item.productName}</span></div>
               <div className="flex justify-between"><span className="text-muted-foreground">Varian</span><span>{item.variantLabel}</span></div>
               <div className="flex justify-between"><span className="text-muted-foreground">Jumlah</span><span>{item.qty}</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">WhatsApp</span><span>{buyer.whatsapp}</span></div>
               <div className="flex justify-between font-bold text-brand pt-2 border-t border-border mt-2"><span>Total</span><span>{formatRupiah(total)}</span></div>
             </div>
-            <Button onClick={() => navigate("/")} className="mt-6 w-full rounded-full bg-brand hover:bg-brand/90 text-white h-11">
-              Kembali ke Toko
-            </Button>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className="block mt-6">
+              <Button className="w-full rounded-full bg-emerald-500 hover:bg-emerald-600 text-white h-11 font-semibold">
+                <MessageCircle className="h-4 w-4 mr-2" /> Kirim Bukti ke WhatsApp Saya
+              </Button>
+            </a>
+            <a href={waAdminUrl} target="_blank" rel="noopener noreferrer" className="block mt-2">
+              <Button variant="outline" className="w-full rounded-full h-11">
+                Kirim Bukti ke Admin Atinstore
+              </Button>
+            </a>
+            <button
+              onClick={() => navigate("/")}
+              className="mt-3 text-sm text-muted-foreground hover:text-brand"
+            >
+              ← Kembali ke Toko
+            </button>
           </div>
         </div>
         <Footer />
@@ -175,8 +246,45 @@ const Checkout = () => {
                   <span className="text-muted-foreground">Email</span>
                   <span className="font-semibold text-foreground break-all">{buyer.email}</span>
                 </div>
+                <div className="flex justify-between gap-3">
+                  <span className="text-muted-foreground">WhatsApp</span>
+                  <span className="font-semibold text-foreground">{buyer.whatsapp}</span>
+                </div>
+                <div className="flex justify-between gap-3 pt-2 border-t border-border">
+                  <span className="text-muted-foreground">Order ID</span>
+                  <span className="font-mono font-semibold text-foreground">{orderId}</span>
+                </div>
               </div>
             </section>
+
+            {method === "qris" && (
+              <section className="rounded-2xl border border-border bg-card p-5">
+                <h2 className="font-display text-base font-bold text-foreground mb-1">
+                  Scan QRIS untuk Membayar
+                </h2>
+                <p className="text-xs text-muted-foreground mb-4">
+                  QR unik untuk transaksi <span className="font-mono">{orderId}</span> — berubah tiap pesanan.
+                </p>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="rounded-2xl bg-white p-3 border border-border">
+                    <img
+                      src={qrImageUrl}
+                      alt={`QR pembayaran ${orderId}`}
+                      className="h-[260px] w-[260px] object-contain"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-muted-foreground">Nominal</div>
+                    <div className="font-display text-xl font-extrabold text-brand">
+                      {formatRupiah(total)}
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground text-center max-w-xs">
+                    Catatan: ini QR simulasi. Untuk QR GoPay/QRIS asli yang nominal-nya berubah otomatis tiap transaksi, perlu integrasi payment gateway (Midtrans/Xendit).
+                  </p>
+                </div>
+              </section>
+            )}
           </div>
 
           {/* Right: summary */}
