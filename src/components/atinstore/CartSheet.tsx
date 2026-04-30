@@ -7,22 +7,31 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Trash2, Minus, Plus, MessageCircle } from "lucide-react";
+import { ShoppingCart, Trash2, Minus, Plus, ArrowRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { buildCheckoutMessage } from "@/lib/checkout";
 import { useState } from "react";
-
-const WA_NUMBER = "6282324644060";
+import { useNavigate } from "react-router-dom";
 
 export const CartSheet = () => {
   const { items, count, totalText, removeItem, updateQty, clear } = useCart();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleCheckout = () => {
     if (items.length === 0) return;
-    const message = buildCheckoutMessage(items, totalText);
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
+    setOpen(false);
+    navigate("/checkout", {
+      state: {
+        items: items.map((i) => ({
+          productName: i.productName,
+          variantLabel: i.variantLabel,
+          price: i.price,
+          qty: i.qty,
+          logo: i.logo,
+          note: i.note,
+        })),
+      },
+    });
   };
 
   return (
@@ -46,7 +55,7 @@ export const CartSheet = () => {
           <SheetTitle className="font-display text-xl flex items-center gap-2">
             <ShoppingCart className="h-5 w-5 text-brand" /> Keranjang ({count})
           </SheetTitle>
-          <SheetDescription>Cek pesanan kamu sebelum checkout via WhatsApp</SheetDescription>
+          <SheetDescription>Cek pesanan kamu sebelum lanjut ke pembayaran</SheetDescription>
         </SheetHeader>
 
         <div className="flex-1 overflow-y-auto -mx-6 px-6 py-4">
@@ -133,7 +142,7 @@ export const CartSheet = () => {
               className="w-full bg-gradient-brand hover:opacity-90 text-white gap-2 rounded-full"
               size="lg"
             >
-              <MessageCircle className="h-4 w-4" /> Checkout via WhatsApp
+              Lanjut ke Pembayaran <ArrowRight className="h-4 w-4" />
             </Button>
             <button
               onClick={clear}
