@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Navbar } from "@/components/atinstore/Navbar";
 import { Footer } from "@/components/atinstore/Footer";
 import { Button } from "@/components/ui/button";
