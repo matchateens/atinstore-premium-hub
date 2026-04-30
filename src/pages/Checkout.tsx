@@ -43,6 +43,7 @@ const Checkout = () => {
   const [method, setMethod] = useState<string>("qris");
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [autoOpened, setAutoOpened] = useState(false);
   // ID transaksi unik — di-generate sekali per kunjungan halaman checkout
   const orderId = useMemo(
     () =>
@@ -124,14 +125,13 @@ const Checkout = () => {
 
     const waAdminUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waMessage)}`;
 
-    // Auto-redirect ke WhatsApp admin setelah sukses
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      const t = setTimeout(() => {
+    // Auto-open WhatsApp admin sekali setelah sukses
+    if (!autoOpened) {
+      setAutoOpened(true);
+      setTimeout(() => {
         window.open(waAdminUrl, "_blank", "noopener,noreferrer");
       }, 800);
-      return () => clearTimeout(t);
-    }, [waAdminUrl]);
+    }
 
     return (
       <main className="min-h-screen bg-background">
