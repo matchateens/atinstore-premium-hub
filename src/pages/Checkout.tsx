@@ -19,14 +19,6 @@ type CheckoutItem = {
 
 const ADMIN_WA = "6282324644060";
 
-const normalizeWa = (input: string) => {
-  const digits = input.replace(/\D/g, "");
-  if (digits.startsWith("0")) return "62" + digits.slice(1);
-  if (digits.startsWith("62")) return digits;
-  if (digits.startsWith("8")) return "62" + digits;
-  return digits;
-};
-
 const PAYMENT_METHODS = [
   { id: "qris", label: "QRIS", desc: "Scan QR semua bank & e-wallet", icon: QrCode },
   { id: "va", label: "Virtual Account", desc: "BCA, BNI, Mandiri, BRI", icon: Building2 },
@@ -51,6 +43,7 @@ const Checkout = () => {
   const [method, setMethod] = useState<string>("qris");
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [autoOpened, setAutoOpened] = useState(false);
   // ID transaksi unik — di-generate sekali per kunjungan halaman checkout
   const orderId = useMemo(
     () =>
@@ -130,9 +123,15 @@ const Checkout = () => {
       .filter(Boolean)
       .join("\n");
 
-    const userWa = normalizeWa(buyer.whatsapp);
-    const waUrl = `https://wa.me/${userWa}?text=${encodeURIComponent(waMessage)}`;
     const waAdminUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waMessage)}`;
+
+    // Auto-open WhatsApp admin sekali setelah sukses
+    if (!autoOpened) {
+      setAutoOpened(true);
+      setTimeout(() => {
+        window.open(waAdminUrl, "_blank", "noopener,noreferrer");
+      }, 800);
+    }
 
     return (
       <main className="min-h-screen bg-background">
@@ -155,14 +154,12 @@ const Checkout = () => {
               <div className="flex justify-between"><span className="text-muted-foreground">WhatsApp</span><span>{buyer.whatsapp}</span></div>
               <div className="flex justify-between font-bold text-brand pt-2 border-t border-border mt-2"><span>Total</span><span>{formatRupiah(total)}</span></div>
             </div>
-            <a href={waUrl} target="_blank" rel="noopener noreferrer" className="block mt-6">
+            <p className="text-xs text-muted-foreground mt-6">
+              Mengarahkan ke WhatsApp admin untuk mengirim bukti pembayaran…
+            </p>
+            <a href={waAdminUrl} target="_blank" rel="noopener noreferrer" className="block mt-3">
               <Button className="w-full rounded-full bg-emerald-500 hover:bg-emerald-600 text-white h-11 font-semibold">
-                <MessageCircle className="h-4 w-4 mr-2" /> Kirim Bukti ke WhatsApp Saya
-              </Button>
-            </a>
-            <a href={waAdminUrl} target="_blank" rel="noopener noreferrer" className="block mt-2">
-              <Button variant="outline" className="w-full rounded-full h-11">
-                Kirim Bukti ke Admin Atinstore
+                <MessageCircle className="h-4 w-4 mr-2" /> Kirim Bukti ke Admin Atinstore
               </Button>
             </a>
             <button
