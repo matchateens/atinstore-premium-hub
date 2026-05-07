@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useCart } from "@/context/CartContext";
+import qrisImage from "@/assets/qris.png";
 
 type BuyerInfo = { name: string; email: string; whatsapp: string };
 type CheckoutItem = {
@@ -34,10 +35,10 @@ type CheckoutItem = {
 const ADMIN_WA = "6282324644060";
 
 const PAYMENT_METHODS = [
-  { id: "qris", label: "QRIS", desc: "Scan QR semua bank & e-wallet", icon: QrCode },
-  { id: "va", label: "Virtual Account", desc: "BCA, BNI, Mandiri, BRI", icon: Building2 },
-  { id: "ewallet", label: "E-Wallet", desc: "GoPay, OVO, Dana, ShopeePay", icon: Wallet },
-  { id: "card", label: "Kartu Kredit / Debit", desc: "Visa, Mastercard, JCB", icon: CreditCard },
+  { id: "qris", label: "QRIS", desc: "Scan QR semua bank & e-wallet", icon: QrCode, disabled: false },
+  { id: "va", label: "Virtual Account", desc: "Segera hadir", icon: Building2, disabled: true },
+  { id: "ewallet", label: "E-Wallet", desc: "Segera hadir", icon: Wallet, disabled: true },
+  { id: "card", label: "Kartu Kredit / Debit", desc: "Segera hadir", icon: CreditCard, disabled: true },
 ];
 
 const parsePrice = (price: string) => {
