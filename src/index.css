@@ -8,73 +8,66 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Atinstore — Electric Blue theme (digitalku-murah inspired) */
-    --background: 214 100% 98%;
-    --foreground: 222 47% 11%;
+    /* Atinstore — Golden Honey light theme based on #FFE2A8 */
+    --background: 40 65% 95%;
+    --foreground: 30 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 40 60% 97%;
+    --card-foreground: 30 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 40 60% 97%;
+    --popover-foreground: 30 25% 15%;
 
     --primary: 221 100% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 214 100% 96%;
+    --secondary: 40 55% 90%;
     --secondary-foreground: 221 80% 28%;
 
-    --muted: 214 60% 96%;
-    --muted-foreground: 220 14% 45%;
+    --muted: 40 40% 91%;
+    --muted-foreground: 30 15% 42%;
 
-    --accent: 214 100% 93%;
+    --accent: 40 70% 86%;
     --accent-foreground: 221 80% 28%;
 
     --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 40% 91%;
-    --input: 214 40% 91%;
+    --border: 40 40% 83%;
+    --input: 40 40% 83%;
     --ring: 221 100% 53%;
 
     --radius: 1rem;
 
-    /* Marketplace tokens — Electric Blue */
+    /* Marketplace tokens — Electric Blue on Golden Honey */
     --brand: 221 100% 53%;          /* #0A5BFF */
     --brand-deep: 224 80% 35%;      /* deep blue */
     --brand-light: 210 100% 70%;    /* sky */
-    --brand-bg: 214 100% 96%;       /* tint */
-    --surface: 210 100% 99%;
-    --surface-2: 0 0% 100%;
+    --brand-bg: 40 55% 91%;         /* honey tint */
+    --surface: 40 55% 96%;
+    --surface-2: 40 60% 98%;
     --gold: 38 100% 55%;            /* orange accent for flash sale */
     --gold-light: 38 100% 70%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(214 100% 97%) 0%, hsl(210 100% 94%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(40 65% 96%) 0%, hsl(40 60% 90%) 100%);
     --gradient-brand: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(var(--brand-light)) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(214 60% 97%) 0%, hsl(210 100% 94%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(40 55% 97%) 0%, hsl(40 50% 92%) 100%);
 
-    --shadow-elegant: 0 20px 50px -20px hsl(var(--brand) / 0.3);
-    --shadow-soft: 0 6px 20px -8px hsl(220 50% 30% / 0.12);
+    --shadow-elegant: 0 20px 50px -20px hsl(var(--brand) / 0.25);
+    --shadow-soft: 0 6px 20px -8px hsl(35 30% 30% / 0.12);
     --shadow-gold: 0 10px 30px -10px hsl(var(--gold) / 0.4);
-    --shadow-card: 0 4px 14px -6px hsl(220 40% 25% / 0.08);
+    --shadow-card: 0 4px 14px -6px hsl(35 25% 25% / 0.08);
 
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
+    --sidebar-background: 40 55% 94%;
+    --sidebar-foreground: 30 15% 25%;
+    --sidebar-primary: 30 20% 15%;
+    --sidebar-primary-foreground: 40 55% 96%;
+    --sidebar-accent: 40 45% 90%;
+    --sidebar-accent-foreground: 30 20% 15%;
+    --sidebar-border: 40 30% 85%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 

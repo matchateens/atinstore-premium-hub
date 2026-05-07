@@ -2,36 +2,36 @@ import netflix from "@/assets/logos/netflix.png";
 import spotify from "@/assets/logos/spotify.png";
 import fore from "@/assets/logos/fore.png";
 import kopken from "@/assets/logos/kopken.png";
-import bstation from "@/assets/logos/bstation.png";
 import canva from "@/assets/logos/canva.png";
 import capcut from "@/assets/logos/capcut.png";
 import chatgpt from "@/assets/logos/chatgpt.png";
-import dremina from "@/assets/logos/dremina.png";
 import gemini from "@/assets/logos/gemini.png";
 import grok from "@/assets/logos/grok.png";
 import office365 from "@/assets/logos/office365.png";
-import vpnhma from "@/assets/logos/vpnhma.png";
-import vpnexpress from "@/assets/logos/vpnexpress.png";
+import microsoft from "@/assets/logos/microsoft.png";
+import vpnhma from "@/assets/logos/hma.png";
+import vpnexpress from "@/assets/logos/express.png";
 import vidio from "@/assets/logos/vidio.png";
 import viu from "@/assets/logos/viu.png";
 import youtube from "@/assets/logos/youtube.png";
 import alightmotion from "@/assets/logos/alightmotion.png";
-import applemusic from "@/assets/logos/applemusic.png";
-import camscanner from "@/assets/logos/camscanner.png";
-import disneyplus from "@/assets/logos/disneyplus.png";
+import applemusic from "@/assets/logos/apple_music.png";
+import disneyplus from "@/assets/logos/disney+.png";
 import duolingo from "@/assets/logos/duolingo.png";
-import googledrive from "@/assets/logos/googledrive.png";
+import googledrive from "@/assets/logos/drive.png";
 import grammarly from "@/assets/logos/grammarly.png";
-import hbomax from "@/assets/logos/hbomax.png";
-import leonardoai from "@/assets/logos/leonardoai.png";
+import hbomax from "@/assets/logos/hbo.png";
+import leonardoai from "@/assets/logos/leonardo.ai.png";
 import lightroom from "@/assets/logos/lightroom.png";
 import iqiyi from "@/assets/logos/iqiyi.png";
-import primevideo from "@/assets/logos/primevideo.png";
+import primevideo from "@/assets/logos/prime.png";
 import scribd from "@/assets/logos/scribd.png";
 import vsco from "@/assets/logos/vsco.png";
 import wattpad from "@/assets/logos/wattpad.png";
 import wetv from "@/assets/logos/wetv.png";
-import wpsoffice from "@/assets/logos/wpsoffice.png";
+import wpsoffice from "@/assets/logos/wps.png";
+import starbucks from "@/assets/logos/starbucks.png";
+import tomoro from "@/assets/logos/tomoro.png";
 
 export type Variant = {
   label: string;
@@ -65,7 +65,6 @@ export const products: Product[] = [
   {
     name: "Bstation Premium",
     category: "Streaming",
-    logo: bstation,
     description: "Akun sharing dan bergaransi.",
     variants: [
       { label: "1 Bulan", price: "Rp 5.000" },
@@ -75,7 +74,6 @@ export const products: Product[] = [
   {
     name: "Camscanner",
     category: "Produktivitas",
-    logo: camscanner,
     description: "Akun sharing 1 tahun, garansi 3 bulan.",
     variants: [{ label: "1 Tahun", price: "Rp 18.000" }],
   },
@@ -139,7 +137,6 @@ export const products: Product[] = [
   {
     name: "Dremina AI",
     category: "AI",
-    logo: dremina,
     description: "Full garansi, plan basic, dapat 570 credit.",
     variants: [{ label: "7 Hari", price: "Rp 2.500" }],
   },
@@ -222,7 +219,7 @@ export const products: Product[] = [
   {
     name: "Microsoft 365",
     category: "Produktivitas",
-    logo: office365,
+    logo: microsoft,
     description: "Full garansi.",
     variants: [{ label: "1 Bulan", price: "Rp 8.000" }],
   },
@@ -408,6 +405,20 @@ export const products: Product[] = [
     name: "Kopi Kenangan",
     category: "Lifestyle",
     logo: kopken,
+    description: "Akun voucher diskon.",
+    variants: [{ label: "Akun", price: "Rp 6.000" }],
+  },
+  {
+    name: "Starbucks",
+    category: "Lifestyle",
+    logo: starbucks,
+    description: "Akun voucher diskon.",
+    variants: [{ label: "Akun", price: "Rp 6.000" }],
+  },
+  {
+    name: "Tomoro Coffee",
+    category: "Lifestyle",
+    logo: tomoro,
     description: "Akun voucher diskon.",
     variants: [{ label: "Akun", price: "Rp 6.000" }],
   },
