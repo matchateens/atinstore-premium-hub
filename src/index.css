@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Atinstore — Golden Honey light theme based on #FFE2A8 */
+    /* Tinspedia — Golden Honey light theme based on #FFE2A8 */
     --background: 40 65% 95%;
     --foreground: 30 25% 15%;
 
@@ -72,7 +72,7 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Atinstore — Dark theme */
+    /* Tinspedia — Dark theme */
     --background: 222 47% 7%;
     --foreground: 210 40% 98%;
 

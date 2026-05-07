@@ -118,7 +118,7 @@ const Checkout = () => {
   const adminFee = method === "va" ? 4000 : method === "card" ? Math.round(subtotal * 0.029) : 0;
   const total = subtotal + adminFee;
 
-  const qrPayload = `ATINSTORE|${orderId}|items:${items.length}|amount:${total}|to:${ADMIN_WA}`;
+  const qrPayload = `TINSPEDIA|${orderId}|items:${items.length}|amount:${total}|to:${ADMIN_WA}`;
   const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=8&data=${encodeURIComponent(qrPayload)}`;
 
   // ==================== STEP 1: KONFIRMASI & ISI FORM ====================
@@ -218,7 +218,7 @@ const Checkout = () => {
   // ==================== STEP 3: SUKSES ====================
   if (success) {
     const lines = [
-      "*BUKTI PEMBAYARAN ATINSTORE*",
+      "*BUKTI PEMBAYARAN TINSPEDIA*",
       "",
       `Order ID: ${orderId}`,
       `Tanggal: ${new Date().toLocaleString("id-ID")}`,
@@ -242,7 +242,7 @@ const Checkout = () => {
       "",
       "Status: ✅ LUNAS (simulasi)",
       "",
-      "Terima kasih telah berbelanja di Atinstore 🙏",
+      "Terima kasih telah berbelanja di Tinspedia 🙏",
     ];
     const waMessage = lines.join("\n");
     const waAdminUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waMessage)}`;

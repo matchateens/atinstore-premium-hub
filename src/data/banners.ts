@@ -25,7 +25,7 @@ export const banners: Banner[] = [
     badge: "Hot Deal",
     image: netflix,
     cta: "Pesan Sekarang",
-    waText: "Halo Atinstore, saya mau order Netflix Premium",
+    waText: "Halo Tinspedia, saya mau order Netflix Premium",
     accent: "from-red-900/90 via-red-900/60 to-transparent",
   },
   {
@@ -36,7 +36,7 @@ export const banners: Banner[] = [
     badge: "AI Trending",
     image: chatgpt,
     cta: "Pesan Sekarang",
-    waText: "Halo Atinstore, saya mau order ChatGPT Plus",
+    waText: "Halo Tinspedia, saya mau order ChatGPT Plus",
     accent: "from-emerald-950/90 via-emerald-900/60 to-transparent",
   },
   {
@@ -47,7 +47,7 @@ export const banners: Banner[] = [
     badge: "Best Seller",
     image: spotify,
     cta: "Cek Harga",
-    waText: "Halo Atinstore, saya mau order Spotify Premium",
+    waText: "Halo Tinspedia, saya mau order Spotify Premium",
     accent: "from-green-950/90 via-green-900/60 to-transparent",
   },
   {
@@ -58,7 +58,7 @@ export const banners: Banner[] = [
     badge: "Super Murah",
     image: canva,
     cta: "Pesan Sekarang",
-    waText: "Halo Atinstore, saya mau order Canva Pro",
+    waText: "Halo Tinspedia, saya mau order Canva Pro",
     accent: "from-purple-950/90 via-purple-900/60 to-transparent",
   },
   {
@@ -69,7 +69,7 @@ export const banners: Banner[] = [
     badge: "Popular",
     image: capcut,
     cta: "Pesan Sekarang",
-    waText: "Halo Atinstore, saya mau order Capcut Pro",
+    waText: "Halo Tinspedia, saya mau order Capcut Pro",
     accent: "from-slate-950/90 via-slate-900/60 to-transparent",
   },
 ];
