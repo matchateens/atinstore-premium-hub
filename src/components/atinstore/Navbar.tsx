@@ -10,11 +10,11 @@ export const Navbar = () => {
       <nav className="container flex items-center gap-3 md:gap-4 py-3">
         <a href="#top" className="flex items-center gap-2 shrink-0 group">
           <div className="h-10 w-10 rounded-xl bg-brand flex items-center justify-center shadow-card overflow-hidden">
-            <img src={logo} alt="Atinstore logo" width={40} height={40} className="h-8 w-8 object-contain" />
+            <img src={logo} alt="Tinspedia logo" width={40} height={40} className="h-8 w-8 object-contain" />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
             <span className="font-display text-base md:text-lg font-extrabold text-foreground tracking-tight">
-              Atinstore
+              Tinspedia
             </span>
             <span className="text-[11px] text-muted-foreground">Digital goods, clean checkout</span>
           </div>

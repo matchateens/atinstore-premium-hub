@@ -13,7 +13,7 @@ export const Hero = () => {
             {/* Left: headline */}
             <div className="lg:col-span-3">
               <div className="text-xs font-bold tracking-[0.22em] text-brand uppercase mb-4">
-                Atinstore
+                Tinspedia
               </div>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight">
                 Toko aplikasi premium{" "}

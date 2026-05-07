@@ -2,7 +2,7 @@ import type { CartItem } from "@/context/CartContext";
 
 export const buildCheckoutMessage = (items: CartItem[], totalText: string) => {
   const lines = [
-    "Halo Atinstore, saya mau order:",
+    "Halo Tinspedia, saya mau order:",
     "",
     ...items.map(
       (i, idx) =>
