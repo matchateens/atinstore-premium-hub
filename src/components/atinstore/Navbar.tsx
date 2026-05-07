@@ -1,16 +1,21 @@
-import logo from "@/assets/logos/atinstore.png";
+import logoLight from "@/assets/logos/tinspedia_light.png";
+import logoDark from "@/assets/logos/tinspedia_dark.png";
 import { Button } from "@/components/ui/button";
 import { Search, Headphones, FileText } from "lucide-react";
 import { CartSheet } from "./CartSheet";
 import { ThemeToggle } from "./ThemeToggle";
+import { useTheme } from "next-themes";
 
 export const Navbar = () => {
+  const { resolvedTheme } = useTheme();
+  const currentLogo = resolvedTheme === "dark" ? logoDark : logoLight;
+
   return (
     <header className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-border">
       <nav className="container flex items-center gap-3 md:gap-4 py-3">
         <a href="#top" className="flex items-center gap-2 shrink-0 group">
-          <div className="h-10 w-10 rounded-xl bg-brand flex items-center justify-center shadow-card overflow-hidden">
-            <img src={logo} alt="Tinspedia logo" width={40} height={40} className="h-8 w-8 object-contain" />
+          <div className="h-10 w-10 rounded-xl bg-white flex items-center justify-center shadow-card overflow-hidden">
+            <img src={currentLogo} alt="Tinspedia logo" width={40} height={40} className="h-full w-full object-cover scale-[1.35]" />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
             <span className="font-display text-base md:text-lg font-extrabold text-foreground tracking-tight">
@@ -36,15 +41,6 @@ export const Navbar = () => {
 
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
-          <Button
-            asChild
-            variant="outline"
-            className="hidden sm:inline-flex rounded-full border-border bg-card text-foreground hover:bg-secondary gap-2 font-semibold"
-          >
-            <a href="#produk">
-              <FileText className="h-4 w-4" /> Cek Invoice
-            </a>
-          </Button>
           <Button
             asChild
             className="hidden sm:inline-flex rounded-full bg-brand text-white hover:bg-brand/90 gap-2 font-semibold shadow-card"

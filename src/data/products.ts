@@ -45,6 +45,7 @@ export type Product = {
   logo?: string;
   description?: string;
   variants: Variant[];
+  isSoldOut?: boolean;
 };
 
 export const products: Product[] = [
@@ -401,6 +402,7 @@ export const products: Product[] = [
     logo: fore,
     description: "Akun voucher diskon.",
     variants: [{ label: "Akun", price: "Rp 6.000" }],
+    isSoldOut: true,
   },
   {
     name: "Kopi Kenangan",
@@ -408,6 +410,7 @@ export const products: Product[] = [
     logo: kopken,
     description: "Akun voucher diskon.",
     variants: [{ label: "Akun", price: "Rp 6.000" }],
+    isSoldOut: true,
   },
   {
     name: "Starbucks",
@@ -415,6 +418,7 @@ export const products: Product[] = [
     logo: starbucks,
     description: "Akun voucher diskon.",
     variants: [{ label: "Akun", price: "Rp 6.000" }],
+    isSoldOut: true,
   },
   {
     name: "Tomoro Coffee",

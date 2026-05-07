@@ -105,7 +105,12 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
       <div className="p-3 md:p-4 flex flex-col gap-1.5 flex-1">
         {/* Badges row */}
         <div className="flex items-center gap-1.5 flex-wrap">
-          {variant === "flash" && flashDiscount ? (
+          {product.isSoldOut && (
+            <span className="inline-flex items-center rounded-md bg-destructive/10 text-destructive text-[10px] font-bold px-1.5 py-0.5">
+              HABIS
+            </span>
+          )}
+          {variant === "flash" && flashDiscount && !product.isSoldOut ? (
             <span className="inline-flex items-center rounded-md bg-destructive/10 text-destructive text-[10px] font-bold px-1.5 py-0.5">
               Flash {flashDiscount}%
             </span>
@@ -115,7 +120,7 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
           </span>
         </div>
 
-        <h3 className="font-display text-sm md:text-base font-extrabold text-foreground truncate">
+        <h3 className={`font-display text-sm md:text-base font-extrabold truncate ${product.isSoldOut ? "text-muted-foreground line-through" : "text-foreground"}`}>
           {product.name}
         </h3>
         {product.description && (
@@ -153,9 +158,10 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
           <Button
             onClick={handleClick}
             size="sm"
+            disabled={product.isSoldOut}
             className="flex-1 bg-brand hover:bg-brand/90 text-white font-semibold rounded-xl h-9"
           >
-            Beli
+            {product.isSoldOut ? "Habis" : "Beli"}
           </Button>
         </div>
       </div>
@@ -211,7 +217,7 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
                 ) : null}
               </div>
 
-              <DialogTitle className="font-display text-xl md:text-2xl font-extrabold uppercase tracking-tight leading-tight">
+              <DialogTitle className={`font-display text-xl md:text-2xl font-extrabold uppercase tracking-tight leading-tight ${product.isSoldOut ? "text-muted-foreground line-through" : ""}`}>
                 {product.name}
               </DialogTitle>
               <div className="text-xs text-emerald-600 font-semibold mt-1">
@@ -277,9 +283,10 @@ export const ProductCard = ({ product, onPickVariant, flashDiscount, variant = "
                     setDetailOpen(false);
                     handleClick();
                   }}
+                  disabled={product.isSoldOut}
                   className="w-full bg-brand hover:bg-brand/90 text-white font-semibold rounded-full h-12 text-base"
                 >
-                  Beli Sekarang
+                  {product.isSoldOut ? "Stok Habis" : "Beli Sekarang"}
                 </Button>
                 <Button
                   onClick={() => setDetailOpen(false)}
