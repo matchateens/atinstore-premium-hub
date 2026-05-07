@@ -129,7 +129,7 @@ const Checkout = () => {
         toast.error(parsed.error.issues[0].message);
         return;
       }
-      setBuyer(parsed.data);
+      setBuyer(parsed.data as BuyerInfo);
     };
 
     return (
