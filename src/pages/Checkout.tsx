@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useCart } from "@/context/CartContext";
+import qrisImage from "@/assets/qris.png";
 
 type BuyerInfo = { name: string; email: string; whatsapp: string };
 type CheckoutItem = {
@@ -34,10 +35,10 @@ type CheckoutItem = {
 const ADMIN_WA = "6282324644060";
 
 const PAYMENT_METHODS = [
-  { id: "qris", label: "QRIS", desc: "Scan QR semua bank & e-wallet", icon: QrCode },
-  { id: "va", label: "Virtual Account", desc: "BCA, BNI, Mandiri, BRI", icon: Building2 },
-  { id: "ewallet", label: "E-Wallet", desc: "GoPay, OVO, Dana, ShopeePay", icon: Wallet },
-  { id: "card", label: "Kartu Kredit / Debit", desc: "Visa, Mastercard, JCB", icon: CreditCard },
+  { id: "qris", label: "QRIS", desc: "Scan QR semua bank & e-wallet", icon: QrCode, disabled: false },
+  { id: "va", label: "Virtual Account", desc: "Segera hadir", icon: Building2, disabled: true },
+  { id: "ewallet", label: "E-Wallet", desc: "Segera hadir", icon: Wallet, disabled: true },
+  { id: "card", label: "Kartu Kredit / Debit", desc: "Segera hadir", icon: CreditCard, disabled: true },
 ];
 
 const parsePrice = (price: string) => {
@@ -115,11 +116,8 @@ const Checkout = () => {
   }
 
   const subtotal = items.reduce((s, i) => s + parsePrice(i.price) * i.qty, 0);
-  const adminFee = method === "va" ? 4000 : method === "card" ? Math.round(subtotal * 0.029) : 0;
+  const adminFee = 0;
   const total = subtotal + adminFee;
-
-  const qrPayload = `TINSPEDIA|${orderId}|items:${items.length}|amount:${total}|to:${ADMIN_WA}`;
-  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=8&data=${encodeURIComponent(qrPayload)}`;
 
   // ==================== STEP 1: KONFIRMASI & ISI FORM ====================
   if (!buyer) {
@@ -317,20 +315,25 @@ const Checkout = () => {
                 {PAYMENT_METHODS.map((m) => {
                   const Icon = m.icon;
                   const active = method === m.id;
+                  const disabled = m.disabled;
                   return (
                     <button
                       key={m.id}
-                      onClick={() => setMethod(m.id)}
+                      onClick={() => !disabled && setMethod(m.id)}
+                      disabled={disabled}
                       className={cn(
                         "flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all",
-                        active ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"
+                        active && !disabled ? "border-brand bg-brand/5" : "border-border",
+                        disabled
+                          ? "opacity-50 cursor-not-allowed"
+                          : "hover:border-brand/40"
                       )}
                     >
-                      <div className={cn("h-10 w-10 rounded-lg flex items-center justify-center shrink-0", active ? "bg-brand text-white" : "bg-secondary text-brand")}>
+                      <div className={cn("h-10 w-10 rounded-lg flex items-center justify-center shrink-0", active && !disabled ? "bg-brand text-white" : "bg-secondary text-brand")}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="min-w-0">
-                        <div className="font-bold text-foreground text-sm">{m.label}</div>
+                        <div className={cn("font-bold text-sm", disabled ? "text-muted-foreground line-through" : "text-foreground")}>{m.label}</div>
                         <div className="text-xs text-muted-foreground mt-0.5">{m.desc}</div>
                       </div>
                     </button>
@@ -353,19 +356,16 @@ const Checkout = () => {
               <section className="rounded-2xl border border-border bg-card p-5">
                 <h2 className="font-display text-base font-bold text-foreground mb-1">Scan QRIS untuk Membayar</h2>
                 <p className="text-xs text-muted-foreground mb-4">
-                  QR unik untuk transaksi <span className="font-mono">{orderId}</span> — berubah tiap pesanan.
+                  Scan QRIS di bawah, lalu masukkan nominal sesuai total. Setelah bayar, kirim bukti via WhatsApp.
                 </p>
                 <div className="flex flex-col items-center gap-3">
                   <div className="rounded-2xl bg-white p-3 border border-border">
-                    <img src={qrImageUrl} alt={`QR pembayaran ${orderId}`} className="h-[260px] w-[260px] object-contain" />
+                    <img src={qrisImage} alt="QRIS Tinspedia" className="h-[320px] w-auto object-contain" />
                   </div>
                   <div className="text-center">
                     <div className="text-xs text-muted-foreground">Nominal</div>
                     <div className="font-display text-xl font-extrabold text-brand">{formatRupiah(total)}</div>
                   </div>
-                  <p className="text-[11px] text-muted-foreground text-center max-w-xs">
-                    Catatan: ini QR simulasi. Untuk QR asli yang nominalnya berubah otomatis, perlu integrasi payment gateway (Midtrans/Xendit).
-                  </p>
                 </div>
               </section>
             )}
