@@ -103,9 +103,9 @@ export const products: Product[] = [
     logo: chatgpt,
     description: "Durasi 1 bulan. Full garansi 25 hari (kecuali Go).",
     variants: [
-      { label: "Via Invite 1 Bulan", price: "Rp 11.000", note: "Full garansi 25 hari" },
-      { label: "Plus Private 1 Bulan", price: "Rp 17.000", note: "Full garansi 25 hari" },
-      { label: "ChatGPT Go 3 Bulan", price: "Rp 8.000", note: "No garansi" },
+      { label: "ChatGPT Go 3 Bulan Privat", price: "Rp 25.000", note: "Garansi" },
+      { label: "ChatGPT 1 Bulan Privat", price: "Rp 16.000", note: "No garansi" },
+      { label: "ChatGPT 1 Bulan Sharing", price: "Rp 10.000", note: "No garansi" },
     ],
   },
   {
