@@ -9,7 +9,7 @@ export const Footer = () => (
           <div className="flex items-center gap-3 mb-4">
             <img src={logo} alt="Tinspedia" width={40} height={40} className="h-10 w-10 rounded-full" />
             <span className="font-display text-xl font-bold">
-              Atin<span className="text-gold-light">store</span>
+              Tins<span className="text-gold-light">pedia</span>
             </span>
           </div>
           <p className="text-sm text-white/70 leading-relaxed">
