@@ -93,8 +93,8 @@ export const products: Product[] = [
     logo: capcut,
     description: "Full garansi & private akun. 35 day auto renew tiap 7 hari.",
     variants: [
-      { label: "7 Day", price: "Rp 2.000" },
-      { label: "35 Day", price: "Rp 8.000" },
+      { label: "7 Day", price: "Rp 5.000" },
+      { label: "35 Day", price: "Rp 15.000" },
     ],
   },
   {
